@@ -91,18 +91,18 @@ namespace TspTest.Discrete_Hopfield
             {
                 for (int j = 0; j < _problem.CitiesNumber; j++)
                 {
-                    term2 += _activations[i*n+j, 0] - _problem.CitiesNumber;
+                    term3 += _activations[i*n+j, 0] - _problem.CitiesNumber;
                     for (int k = 0; k < _problem.CitiesNumber; k++)
                     {
                         if (j != k)
                         {
-                            term1 += _activations[j * n + i, 0] * _activations[k * n + i, 0];
-                            term2 += _activations[i * n + j, 0] * _activations[i * n + k, 0];
+                            term1 += _activations[j*n + i, 0]*_activations[k*n + i, 0];
+                            term2 += _activations[i*n + j, 0]*_activations[i*n + k, 0];
                         }
                         if (i != j)
-                            term4 += _problem.D[i, j] * _activations[i * n + k, 0] *
-                                     (availableActivation(_activations, j * n + i + 1) +
-                                      availableActivation(_activations, j * n + i - 1));
+                            term4 += _problem.D[i, j]*_activations[i*n + k, 0]*
+                                     (availableActivation(_activations, j*n + i + 1) +
+                                      availableActivation(_activations, j*n + i - 1));
 
                     }
                 }
