@@ -1,10 +1,12 @@
 ﻿using MathNet.Numerics.LinearAlgebra;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TspTest.Discrete_Hopfield;
 using TspTest.Tsp;
 
 namespace TspTest
@@ -31,6 +33,18 @@ namespace TspTest
             var result = new SimulatedAnnealing.SimulatedAnnealing(distances).Solve();
             Console.WriteLine($"Path = {result.Item1.Select(x => x.ToString()).Aggregate((x, y) => x + " " + y)}\nCost = {result.Item2}");
             Console.ReadLine();
+
+            //Test
+            //List<City> l = new List<City>();
+            //l.Add(new City { Name = "city1", Position = new PointF(3, 3) });
+            //l.Add(new City { Name = "city2", Position = new PointF(4, 5) });
+            //l.Add(new City { Name = "city3", Position = new PointF(5, 1) });
+            //l.Add(new City { Name = "city4", Position = new PointF(7, 3) });
+
+            //TSP prob = new TSP(l);
+            //prob.Solve();
+
+            //Console.ReadKey();
         }
     }
 }
