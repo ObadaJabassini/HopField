@@ -57,7 +57,7 @@ namespace TspTest.Discrete_Hopfield
             IEnumerable<int> indices = _getRandomIndices();
             Func<double, double, double> f = (ui, old) => ui > 0 ? 1 : (ui < 0 ? 0 : old);
             bool systemChanged = true;
-            int e = 1;
+            int e = 0;
             while (systemChanged && e++<Epochs)
             {
                 systemChanged = false;
@@ -94,14 +94,15 @@ namespace TspTest.Discrete_Hopfield
                     term2 += _activations[i*n+j, 0] - _problem.CitiesNumber;
                     for (int k = 0; k < _problem.CitiesNumber; k++)
                     {
-                        if (i != k)
-                            term1 += _activations[i*n+j, 0]*_activations[k*n+j, 0];
-                        if (k != j)
-                            term2 += _activations[i*n+j, 0]*_activations[i*n+k, 0];
+                        if (j != k)
+                        {
+                            term1 += _activations[j * n + i, 0] * _activations[k * n + i, 0];
+                            term2 += _activations[i * n + j, 0] * _activations[i * n + k, 0];
+                        }
                         if (i != j)
-                            term4 += _problem.D[i, j]*_activations[i*n + k, 0]*
-                                     (availableActivation(_activations, j*n + i + 1) +
-                                      availableActivation(_activations, j*n + i - 1));
+                            term4 += _problem.D[i, j] * _activations[i * n + k, 0] *
+                                     (availableActivation(_activations, j * n + i + 1) +
+                                      availableActivation(_activations, j * n + i - 1));
 
                     }
                 }
