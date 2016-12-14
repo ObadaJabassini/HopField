@@ -120,7 +120,7 @@ namespace TspTest.Tsp
                         path[j + 1] = i + 1;
                 }
             }
-            return path;
+            return path.Skip(1).ToList();
         }
 
         private double _energy(Matrix<double> v)

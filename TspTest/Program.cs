@@ -27,8 +27,9 @@ namespace TspTest
                 }
             }
             Console.WriteLine();
-            IList<int> result = new Hopfield(n, distances).Solve();
-            Console.WriteLine(result.Skip(1).Select(x => x.ToString()).Aggregate((x, y) => x + " " + y));
+            //IList<int> result = new Hopfield(n, distances).Solve();
+            var result = new SimulatedAnnealing.SimulatedAnnealing(distances).Solve();
+            Console.WriteLine($"Path = {result.Item1.Select(x => x.ToString()).Aggregate((x, y) => x + " " + y)}\nCost = {result.Item2}");
             Console.ReadLine();
         }
     }
