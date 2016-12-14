@@ -14,7 +14,7 @@ namespace TspTest.Tsp
         private double A, B, C, D, o, alpha;
         private int numberOfCities;
         private Matrix<double> _weights;
-        public Hopfield(int numberOfCities, Matrix<double> distances, double A = 0.5, double B = 0.5, double C = 0.2, double D = 0.5, double o = 0, double alpha = 3)
+        public Hopfield(int numberOfCities, Matrix<double> distances, double A = 500, double B = 500, double C = 200, double D = 500, double o = 0, double alpha = 3)
         {
             this._distances = distances;
             var t = numberOfCities * numberOfCities;
@@ -49,8 +49,7 @@ namespace TspTest.Tsp
             int iterations = 1;
             IEnumerable<int> indices = Enumerable.Range(0, numberOfCities);
             Random rnd = new Random();
-            double M = numberOfCities;
-            double prevEnergy = 0, energy = 1; 
+            double prevEnergy = 0, energy = 1;
             while (iterations++ <= 10000 && prevEnergy != energy)
             {
                 prevEnergy = energy;
@@ -61,10 +60,19 @@ namespace TspTest.Tsp
                     foreach (var j in secondIndexArray)
                     {
                         var index = to1D(i, j, numberOfCities);
-                        // not sure here
-                        // currentInput[index] = _weights.Row(to1D(i, j, X.ColumnCount)) * currentInput;
-                        currentInput[index] = -(currentInput[index] + A * X.Row(i).Sum() + B * X.Column(j).Sum() + C * (X.RowSums().Sum() - M) + D * _distances.Row(i).EnumerateIndexed().Select(xx => xx.Item2 * (checkIndex(X, xx.Item1, j + 1) + checkIndex(X, xx.Item1, j - 1))).Sum());
-                        X[i, j] = (1 + Math.Tanh(this.alpha * currentInput[index])) / 2;
+                        var vec = Vector<double>.Build.Dense(numberOfCities * numberOfCities, 0);
+                        int dd = 0;
+                        for (int k = 0; k < X.RowCount; k++)
+                        {
+                            for (int v = 0; v < X.ColumnCount; v++)
+                            {
+                                vec[dd++] = X[k, v];
+                            }
+                        }
+                        currentInput[index] = _weights.Row(to1D(i, j, X.ColumnCount)) * vec;
+                        //currentInput[index] = -(currentInput[index] + A * X.Row(i).Sum() + B * X.Column(j).Sum() + C * (X.RowSums().Sum() - numberOfCities) + D * _distances.Row(i).EnumerateIndexed().Select(xx => xx.Item2 * (checkIndex(X, xx.Item1, j + 1) + checkIndex(X, xx.Item1, j - 1))).Sum());
+                        //X[i, j] = (1 + Math.Tanh(this.alpha * currentInput[index])) / 2;
+                        X[i, j] = currentInput[index] > 0 ? 1 : 0;
                     }
                 }
                 energy = _energy(X);
@@ -88,13 +96,6 @@ namespace TspTest.Tsp
             //        {
             //            foreach (var j in secondIndexArray)
             //            {
-            //                //double temp1 = 0, temp2 = 0;
-            //                //for (int k = 0; k < numberOfCities; k++)
-            //                //{
-            //                //    temp1 += X[i, k];
-            //                //    temp2 += _distances[i, k] * (checkIndex(X, k, j + 1) + checkIndex(X, k, j - 1));
-            //                //} 
-            //                //return -currentInput[to1D(i, j, numberOfCities)] / t - (A + B) * temp1 - C * (X.RowSums().Sum() - m) - D * temp2;
             //                var index = to1D(i, j, numberOfCities);
             //                currentInput[index] = -A * X.Row(i).EnumerateIndexed().Where(xx => xx.Item1 != j).Select(xx => xx.Item2).Sum()
             //                           - B * X.Column(j).EnumerateIndexed().Where(xx => xx.Item1 != i).Select(xx => xx.Item2).Sum()
@@ -143,8 +144,7 @@ namespace TspTest.Tsp
                     }
                 }
             }
-            //return A * temp1 / 2 + B * temp2 / 2 + D * temp3 / 2 + C * Math.Pow(v.RowSums().Sum() - (numberOfCities + o), 2) / 2;
-            return A * temp1 + B * temp2 + D * temp3 + C * Math.Pow(v.RowSums().Sum() - (numberOfCities + o), 2);
+            return (A * temp1 + B * temp2 + D * temp3 + C * Math.Pow(v.RowSums().Sum() - (numberOfCities + o), 2)) / 2;
         }
     }
 }
