@@ -26,6 +26,7 @@ namespace TspTest
                     }
                 }
             }
+            Console.WriteLine();
             IList<int> result = new Hopfield(n, distances).Solve();
             Console.WriteLine(result.Skip(1).Select(x => x.ToString()).Aggregate((x, y) => x + " " + y));
             Console.ReadLine();

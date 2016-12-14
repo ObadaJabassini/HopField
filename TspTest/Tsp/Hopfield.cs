@@ -10,7 +10,6 @@ namespace TspTest.Tsp
     {
         private Matrix<double> _distances;
         private Func<int, int, int, int> to1D = (row, column, width) => row * width + column;
-        private Func<int, int, Tuple<int, int>> to2D = (index, width) => new Tuple<int, int>(index % width, index / width);
         private Func<Matrix<double>, int, int, double> checkIndex = (Matrix<double> vv, int u, int v) => u >= 0 && u < vv.RowCount && v >= 0 && v < vv.ColumnCount ? vv[u, v] : 0;
         private double A, B, C, D, o, alpha;
         private int numberOfCities;
@@ -29,27 +28,23 @@ namespace TspTest.Tsp
         
         public IList<int> Solve()
         {
-            Console.WriteLine();
-            Vector<double> currentInput = Vector<double>.Build.Random(numberOfCities * numberOfCities, new MathNet.Numerics.Distributions.Beta(2, 2));
-            Matrix<double> X = Matrix<double>.Build.Dense(numberOfCities, numberOfCities, 0);
-            for (int i = 0; i < X.RowCount; i++)
-            {
-                X[i, i] = 1;
-            }
-            double prevEnergy = 0, energy = 1;
+            Vector<double> currentInput = Vector<double>.Build.Dense(numberOfCities * numberOfCities, 0);
+            Matrix<double> X = Matrix<double>.Build.Random(numberOfCities, numberOfCities, new MathNet.Numerics.Distributions.Beta(2, 2));
+            double prevEnergy = 0, energy = _energy(X);
             int iterations = 1;
-            IEnumerable<int> indices = Enumerable.Range(0, numberOfCities - 1);
+            IEnumerable<int> indices = Enumerable.Range(0, numberOfCities);
             Random rnd = new Random();
-            IEnumerable<int> firstIndexArray = indices.OrderBy(x => rnd.Next()),
-                             secondIndexArray = indices.OrderBy(x => rnd.Next());
-            while (prevEnergy != energy && iterations++ <= 1000)
+            int internalLoop = 5 * numberOfCities * numberOfCities;
+            while (prevEnergy != energy && iterations++ <= 10000)
             {
                 prevEnergy = energy;
-                foreach(var i in firstIndexArray)
+                for (int vv = 1; vv <= internalLoop; ++vv)
                 {
-                    foreach(var j in secondIndexArray)
+                    IEnumerable<int> firstIndexArray = indices.OrderBy(x => rnd.Next()),
+                                     secondIndexArray = indices.OrderBy(x => rnd.Next());
+                    foreach (var i in firstIndexArray)
                     {
-                        Func<double> f = () =>
+                        foreach (var j in secondIndexArray)
                         {
                             //double temp1 = 0, temp2 = 0;
                             //for (int k = 0; k < numberOfCities; k++)
@@ -58,23 +53,22 @@ namespace TspTest.Tsp
                             //    temp2 += _distances[i, k] * (checkIndex(X, k, j + 1) + checkIndex(X, k, j - 1));
                             //}
                             //return -currentInput[to1D(i, j, numberOfCities)] / t - (A + B) * temp1 - C * (X.RowSums().Sum() - m) - D * temp2;
-                            return - A * X.Row(i).EnumerateIndexed().Where(xx => xx.Item1 != j).Select(xx => xx.Item2).Sum()
-                                   - B * X.Column(j).EnumerateIndexed().Where(xx => xx.Item1 != i).Select(xx => xx.Item2).Sum()
-                                   - C * (X.RowSums().Sum() - (numberOfCities + o))
-                                   - D * _distances.Row(i).EnumerateIndexed().Select(xx => xx.Item2 * (checkIndex(X, xx.Item1, j + 1) + checkIndex(X, xx.Item1, j - 1))).Sum();
-                        };
-                        var index = to1D(i, j, numberOfCities);
-                        currentInput[index] = f();
-                        X[i, j] = (1 + Math.Tanh(this.alpha * currentInput[index])) / 2;
+                            var index = to1D(i, j, numberOfCities);
+                            currentInput[index] = -A * X.Row(i).EnumerateIndexed().Where(xx => xx.Item1 != j).Select(xx => xx.Item2).Sum()
+                                       - B * X.Column(j).EnumerateIndexed().Where(xx => xx.Item1 != i).Select(xx => xx.Item2).Sum()
+                                       - C * (X.RowSums().Sum() - (numberOfCities + o))
+                                       - D * _distances.Row(i).EnumerateIndexed().Select(xx => xx.Item2 * (checkIndex(X, xx.Item1, j + 1) + checkIndex(X, xx.Item1, j - 1))).Sum();
+                            X[i, j] = (1 + Math.Tanh(this.alpha * currentInput[index])) / 2;
+                        }
                     }
+                    Console.WriteLine("X : " + X);
                 }
                 energy = _energy(X);
                 Console.WriteLine("Energy = " + energy);
             }
-            Console.WriteLine(X);
+            Console.WriteLine("Result X :" + X);
             X = X.Map(e => Math.Round(e));
             IList<int> path = Enumerable.Repeat(0, numberOfCities + 1).ToList();
-            //X.EnumerateRowsIndexed().ToList().ForEach(x => { path[x.Item2.EnumerateIndexed().Where(xx => xx.Item2 == 1).Select(xx => xx.Item1).First()] = x.Item1 + 1; });
             for (int i = 0; i < X.RowCount; i++)
             {
                 for (int j = 0; j < X.ColumnCount; j++)
