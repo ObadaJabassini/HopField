@@ -34,12 +34,19 @@ namespace TspTest
             //Console.WriteLine($"Path = {result.Item1.Select(x => x.ToString()).Aggregate((x, y) => x + " " + y)}\nCost = {result.Item2}");
             //Console.ReadLine();
 
-
+            //cityLocations(1,:) = [0 3];
+            //cityLocations(2,:) = [1 5];
+            //cityLocations(3,:) = [4 5];
+            //cityLocations(4,:) = [5 2];
+            //cityLocations(5,:) = [4 0];
+            //cityLocations(6,:) = [1 0];
             List<City> l = new List<City>();
-            l.Add(new City { Name = "city1", Position = new PointF(3, 3) });
-            l.Add(new City { Name = "city2", Position = new PointF(4, 5) });
-            l.Add(new City { Name = "city3", Position = new PointF(5, 1) });
-            l.Add(new City { Name = "city4", Position = new PointF(7, 3) });
+            l.Add(new City { Name = "city1", Position = new PointF(0, 3) });
+            l.Add(new City { Name = "city2", Position = new PointF(1, 5) });
+            l.Add(new City { Name = "city3", Position = new PointF(4, 5) });
+            l.Add(new City { Name = "city4", Position = new PointF(5, 2) });
+            l.Add(new City { Name = "city5", Position = new PointF(4, 0) });
+            l.Add(new City { Name = "city6", Position = new PointF(1, 0) });
 
             TSP prob = new TSP(l);
             prob.Solve();

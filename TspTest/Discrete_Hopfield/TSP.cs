@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using MathNet.Numerics.LinearAlgebra;
+using MathNet.Numerics.Statistics;
 
 namespace TspTest.Discrete_Hopfield
 {
@@ -30,6 +31,9 @@ namespace TspTest.Discrete_Hopfield
                                 (int)
                                     Math.Sqrt(Math.Pow(e2.Position.X - e1.Position.X, 2) +
                                               Math.Pow(e2.Position.Y - e1.Position.Y, 2))));
+
+            //Normalize
+            D.Divide(D.Enumerate().Maximum());
         }
 
         public void Solve()
@@ -50,7 +54,7 @@ namespace TspTest.Discrete_Hopfield
             {
                 for (int j = 0; j < CitiesNumber; j++)
                 {
-                    if(sol.Item1[i*CitiesNumber+j, 0] == 1)
+                    if(sol.Item1[i+CitiesNumber*j, 0] == 1)
                         Console.WriteLine("Step: {0} => City: {1}", j, _cities[i].Name);
                 }
             }

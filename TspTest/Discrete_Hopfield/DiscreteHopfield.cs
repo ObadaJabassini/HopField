@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using MathNet.Numerics.Distributions;
 using MathNet.Numerics.LinearAlgebra;
 
 namespace TspTest.Discrete_Hopfield
@@ -9,7 +10,7 @@ namespace TspTest.Discrete_Hopfield
     {
         private Matrix<double> _activations;
         private Matrix<double> _weights;
-        private Matrix<double> _biases; 
+        //private Matrix<double> _biases; 
         private TSP _problem;
         private List<double> _energyValues = new List<double>(); 
         public double A { get; }
@@ -17,10 +18,10 @@ namespace TspTest.Discrete_Hopfield
         public double D { get; }
         public double C { get; }
         public double N { get; }
-        public double Epochs { get; set; } = 150;
+        public double Epochs { get; set; }
 
         public DiscreteHopfield(TSP prop, double A = 500, double B = 500, 
-            double D = 500, double C = 200, double N = 15, double Epochs = 150)
+            double D = 500, double C = 200, double N = 15, double Epochs = 100000)
         {
             this.A = A;
             this.B = B;
@@ -29,10 +30,11 @@ namespace TspTest.Discrete_Hopfield
             this.N = N;
             this.Epochs = Epochs;
             _problem = prop;
-            _activations = Matrix<double>.Build.Dense(prop.CitiesNumber* prop.CitiesNumber, 1, 0);
+
+            _activations = Matrix<double>.Build.Dense(prop.CitiesNumber* prop.CitiesNumber, 1, -1);
             _weights = Matrix<double>.Build.Dense(prop.CitiesNumber * prop.CitiesNumber,
                 prop.CitiesNumber * prop.CitiesNumber);
-            _biases = Matrix<double>.Build.Dense(1, prop.CitiesNumber* prop.CitiesNumber, C*N);
+            //_biases = Matrix<double>.Build.Dense(1, prop.CitiesNumber* prop.CitiesNumber, C*N);
             _initWeights();
         }
 
@@ -44,10 +46,17 @@ namespace TspTest.Discrete_Hopfield
             {
                 for (int j = 0; j < _weights.ColumnCount; j++)
                 {
-                    _weights[i, j] = - A* d(i/n, j/n)*(1 - d(i%n, j%n))
-                                     - B* d(i%n, j%n)*(1 - d(i/n, j/n)) 
-                                     - C 
-                                     - _problem.D[i/n, j/n]*(d(j%n, i%n + 1) + d(j%n, i%n - 1));
+                    if (i / n == j / n && i % n != j % n)
+                        _weights[i, j] = -2;
+                    else if (i / n != j / n && i % n == j % n)
+                        _weights[i, j] = -2;
+                    else if (i / n != j / n && i % n != j % n && Math.Abs(i % n - j % n) == 1)
+                        _weights[i, j] = -_problem.D[i / n, j / n];
+                    
+                    //Or
+                    //_weights[i, j] = -2 * d(i / n, j / n) * (1 - d(i % n, j % n))
+                    //                 - 2 * d(i % n, j % n) * (1 - d(i / n, j / n))
+                    //                 - _problem.D[i / n, j / n] * (1 - d(i % n, j % n)) * (1 - d(i / n, j / n)) * (d(j % n, i % n + 1) + d(j % n, i % n - 1));
                 }
             }
         }
@@ -55,7 +64,8 @@ namespace TspTest.Discrete_Hopfield
         public Tuple<Matrix<double>, List<double>> Iterate()
         {
             IEnumerable<int> indices = _getRandomIndices();
-            Func<double, double, double> f = (ui, old) => ui > 0 ? 1 : (ui < 0 ? 0 : old);
+            //threshold = 20
+            Func<double, double> f = (ui) => ui >= 20 ? 1 : -1;
             bool systemChanged = true;
             int e = 0;
             while (systemChanged && e++<Epochs)
@@ -64,11 +74,23 @@ namespace TspTest.Discrete_Hopfield
                 foreach (var i in indices)
                 {
                     double oldActivation = _activations[i, 0];
-                    _activations[i, 0] = f((_weights.Row(i).ToRowMatrix()*_activations)[0, 0] + _biases[0, i], oldActivation);
+                    _activations[i, 0] = f((_weights.Row(i).ToRowMatrix()*_activations)[0, 0]);
                     if (oldActivation != _activations[i, 0])
                         systemChanged = true;
                 }
+
                 _calculateEnergy();
+
+                //Print activations
+                for (int i = 0; i < _problem.CitiesNumber; i++)
+                {
+                    for (int j = 0; j < _problem.CitiesNumber; j++)
+                    {
+                        Console.Write("{0,2} ",_activations[j+_problem.CitiesNumber*i, 0]);
+                    }
+                    Console.WriteLine();
+                }
+                Console.WriteLine();
             }
 
             return new Tuple<Matrix<double>, List<double>>(_activations, _energyValues);
@@ -84,7 +106,7 @@ namespace TspTest.Discrete_Hopfield
 
         private void _calculateEnergy()
         {
-            Func<Matrix<double>, int, double> availableActivation = (mat, i) => i >= 0 && i < mat.RowCount ? mat[i, 0] : 0;
+            Func<Matrix<double>, int, double> availableActivation = (mat, i) => i >= 0 && i < mat.RowCount ? mat[i, 0] : -1;
             int n = _problem.CitiesNumber;
             double term1 = 0, term2 = 0, term3 = 0, term4 = 0;
             for (int i = 0; i < _problem.CitiesNumber; i++)
