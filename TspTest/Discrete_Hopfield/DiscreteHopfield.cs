@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using MathNet.Numerics.Distributions;
+using Accord.Math;
 using MathNet.Numerics.LinearAlgebra;
+
 
 namespace TspTest.Discrete_Hopfield
 {
     class DiscreteHopfield
     {
-        private Matrix<double> _activations;
-        private Matrix<double> _weights;
+        //private Matrix<double> _activations;
+        private double[,] _activations;
+        //private Matrix<double> _weights;
+        private double[,] _weights;
         //private Matrix<double> _biases; 
         private TSP _problem;
         private List<double> _energyValues = new List<double>(); 
@@ -21,7 +24,7 @@ namespace TspTest.Discrete_Hopfield
         public double Epochs { get; set; }
 
         public DiscreteHopfield(TSP prop, double A = 500, double B = 500, 
-            double D = 500, double C = 200, double N = 15, double Epochs = 100000)
+            double D = 500, double C = 200, double N = 15, double Epochs = 1000)
         {
             this.A = A;
             this.B = B;
@@ -31,9 +34,11 @@ namespace TspTest.Discrete_Hopfield
             this.Epochs = Epochs;
             _problem = prop;
 
-            _activations = Matrix<double>.Build.Dense(prop.CitiesNumber* prop.CitiesNumber, 1, -1);
-            _weights = Matrix<double>.Build.Dense(prop.CitiesNumber * prop.CitiesNumber,
-                prop.CitiesNumber * prop.CitiesNumber);
+            //_activations = Matrix<double>.Build.Dense(prop.CitiesNumber* prop.CitiesNumber, 1, -1);
+            _activations = Matrix.Ones(_problem.CitiesNumber*_problem.CitiesNumber, 1).Apply((e) => e*-1);
+            //_weights = Matrix<double>.Build.Dense(prop.CitiesNumber * prop.CitiesNumber,
+            //    prop.CitiesNumber * prop.CitiesNumber);
+            _weights = Matrix.Zeros(prop.CitiesNumber*prop.CitiesNumber, prop.CitiesNumber*prop.CitiesNumber);
             //_biases = Matrix<double>.Build.Dense(1, prop.CitiesNumber* prop.CitiesNumber, C*N);
             _initWeights();
         }
@@ -42,9 +47,11 @@ namespace TspTest.Discrete_Hopfield
         {
             Func<int, int, int> d = (i, j) => Convert.ToInt32(i == j);
             int n = _problem.CitiesNumber;
-            for (int i = 0; i < _weights.RowCount; i++)
+            //for (int i = 0; i < _weights.RowCount; i++)
+            for (int i = 0; i < _weights.Rows(); i++)
             {
-                for (int j = 0; j < _weights.ColumnCount; j++)
+                //for (int j = 0; j < _weights.ColumnCount; j++)
+                for (int j = 0; j < _weights.Columns(); j++)
                 {
                     if (i / n == j / n && i % n != j % n)
                         _weights[i, j] = -2;
@@ -61,7 +68,8 @@ namespace TspTest.Discrete_Hopfield
             }
         }
 
-        public Tuple<Matrix<double>, List<double>> Iterate()
+        //public Tuple<Matrix<double>, List<double>> Iterate()
+        public Tuple<double[,], List<double>> Iterate()
         {
             IEnumerable<int> indices = _getRandomIndices();
             //threshold = 20
@@ -74,7 +82,8 @@ namespace TspTest.Discrete_Hopfield
                 foreach (var i in indices)
                 {
                     double oldActivation = _activations[i, 0];
-                    _activations[i, 0] = f((_weights.Row(i).ToRowMatrix()*_activations)[0, 0]);
+                    //_activations[i, 0] = f((_weights.Row(i).ToRowMatrix()*_activations)[0, 0]);
+                    _activations[i, 0] = f(_weights.Multiply(_activations)[0,0]);
                     if (oldActivation != _activations[i, 0])
                         systemChanged = true;
                 }
@@ -93,7 +102,7 @@ namespace TspTest.Discrete_Hopfield
                 Console.WriteLine();
             }
 
-            return new Tuple<Matrix<double>, List<double>>(_activations, _energyValues);
+            return new Tuple<double[,], List<double>>(_activations, _energyValues);
         }
 
         private IEnumerable<int> _getRandomIndices()
@@ -106,7 +115,8 @@ namespace TspTest.Discrete_Hopfield
 
         private void _calculateEnergy()
         {
-            Func<Matrix<double>, int, double> availableActivation = (mat, i) => i >= 0 && i < mat.RowCount ? mat[i, 0] : -1;
+            //Func<Matrix<double>, int, double> availableActivation = (mat, i) => i >= 0 && i < mat.RowCount ? mat[i, 0] : -1;
+            Func<double[,], int, double> availableActivation = (mat, i) => i >= 0 && i < mat.Rows() ? mat[i, 0] : -1;
             int n = _problem.CitiesNumber;
             double term1 = 0, term2 = 0, term3 = 0, term4 = 0;
             for (int i = 0; i < _problem.CitiesNumber; i++)
