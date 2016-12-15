@@ -86,7 +86,7 @@ namespace TspTest.Discrete_Hopfield
                 {
                     for (int j = 0; j < _problem.CitiesNumber; j++)
                     {
-                        Console.Write("{0,2} ",_activations[j+_problem.CitiesNumber*i, 0]);
+                        Console.Write("{0,2} ",_activations[i+_problem.CitiesNumber*j, 0]);
                     }
                     Console.WriteLine();
                 }
