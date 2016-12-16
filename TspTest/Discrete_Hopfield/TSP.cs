@@ -37,13 +37,30 @@ namespace TspTest.Discrete_Hopfield
 
             //Normalize
             //D.Divide(D.Enumerate().Maximum());
-            D.Apply(e => e / (D.Max()));
+            //D.Apply(e => e / (D.Max()));
         }
 
         public void Solve()
         {
-            DiscreteHopfield nn = new DiscreteHopfield(this);
-            _generateSolution(nn.Iterate());
+            HopfieldTank nn = new HopfieldTank(this);
+            int e = 0;
+            Tuple<double[,], List<double>> t = new Tuple<double[,], List<double>>(new double[,] {}, new List<double>());
+            while (e++<1000)
+            {
+                t = nn.Analyze();
+                //Print activations
+                for (int i = 0; i < CitiesNumber; i++)
+                {
+                    for (int j = 0; j < CitiesNumber; j++)
+                    {
+                        Console.Write("{0,2} ", Math.Round(t.Item1[i, j]));
+                    }
+                    Console.WriteLine();
+                }
+                Console.WriteLine();
+            }
+
+            t.Item2.ForEach(Console.WriteLine);
         }
 
         //private void _generateSolution(Tuple<Matrix<double>, List<double>> sol)

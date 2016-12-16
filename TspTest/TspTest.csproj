@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Discrete_Hopfield\DiscreteHopfield.cs" />
+    <Compile Include="Discrete_Hopfield\HopfieldTank.cs" />
     <Compile Include="Discrete_Hopfield\TSP.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
