@@ -6,8 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TspTest.Discrete_Hopfield;
-using TspTest.Tsp;
+using TspTest.Genetic;
 
 namespace TspTest
 {
@@ -40,17 +39,23 @@ namespace TspTest
             //cityLocations(4,:) = [5 2];
             //cityLocations(5,:) = [4 0];
             //cityLocations(6,:) = [1 0];
-            List<City> l = new List<City>();
-            l.Add(new City { Name = "city1", Position = new PointF(0, 3) });
-            l.Add(new City { Name = "city2", Position = new PointF(1, 5) });
-            l.Add(new City { Name = "city3", Position = new PointF(4, 5) });
-            l.Add(new City { Name = "city4", Position = new PointF(5, 2) });
-            l.Add(new City { Name = "city5", Position = new PointF(4, 0) });
-            l.Add(new City { Name = "city6", Position = new PointF(1, 0) });
+            IList<City> l = new List<City>();
+            //l.Add(new City { Name = "city1", Position = new PointF(0, 3) });
+            //l.Add(new City { Name = "city2", Position = new PointF(1, 5) });
+            //l.Add(new City { Name = "city3", Position = new PointF(4, 5) });
+            //l.Add(new City { Name = "city4", Position = new PointF(5, 2) });
+            //l.Add(new City { Name = "city5", Position = new PointF(4, 0) });
+            //l.Add(new City { Name = "city6", Position = new PointF(1, 0) });
 
-            TSP prob = new TSP(l);
-            prob.Solve();
+            l.Add(new City { Name = "city2", Position = new PointF(0, 0) });
+            l.Add(new City { Name = "city3", Position = new PointF(35, 0) });
+            l.Add(new City { Name = "city1", Position = new PointF(8, 6) });
+            l.Add(new City { Name = "city4", Position = new PointF(5, 5) });
 
+            //TSP prob = new TSP(l);
+            //prob.Solve();
+            Genetic.Path path = new GeneticAlgorithm(new Population(l, 10)).Solve();
+            Console.WriteLine(path);
             Console.ReadKey();
         }
     }

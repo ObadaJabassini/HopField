@@ -51,6 +51,10 @@
   <ItemGroup>
     <Compile Include="Discrete_Hopfield\DiscreteHopfield.cs" />
     <Compile Include="Discrete_Hopfield\TSP.cs" />
+    <Compile Include="Genetic\City.cs" />
+    <Compile Include="Genetic\GeneticAlgorithm.cs" />
+    <Compile Include="Genetic\Path.cs" />
+    <Compile Include="Genetic\Population.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Hopfield\Hopfield.cs" />
