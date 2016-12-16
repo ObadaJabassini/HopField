@@ -18,7 +18,7 @@ namespace TspTest.Genetic
         private void _evolve()
         {
             var size = Population.Paths.Count;
-            Population next = new Population(size);
+            Population next = new Population();
             Random rand = new Random();
             var f = Population.Fittest.Fitness;
             var selected = Population.Paths.Where(e => e.Fitness > 5 * f / 10).ToList();
@@ -35,6 +35,7 @@ namespace TspTest.Genetic
                 var cross = _crossOver(selected[k], selected[j]);
                 next.Add(cross);
             }
+            //Console.WriteLine(next.ToString());
             for (int i = 0; i < size; i++)
             {
                 _mutate(next[i]);
@@ -62,7 +63,7 @@ namespace TspTest.Genetic
             Random rand = new Random();
             Path result = new Path(count);
             int start = rand.Next(0, count - 1),
-                end   = rand.Next(start, count - start - 1);
+                end   = rand.Next(start + 1, count - start - 1);
             for (int i = start; i <= end; i++)
             {
                 result[i] = first[i];
@@ -81,7 +82,7 @@ namespace TspTest.Genetic
         private void _mutate(Path path)
         {
             var count = path.Cities.Count;
-            var rate = 0.02;
+            var rate = 0.08;
             Random rand = new Random();
             for (int i = 0; i < count; ++i)
             {

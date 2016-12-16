@@ -27,7 +27,7 @@ namespace TspTest.Genetic
         {
             for (int i = 0; i < cities.Count; i++)
             {
-                this.Cities[i] = cities[indices[i]];
+                this.Cities.Add(cities[indices[i]]);
             }
         }
         public double Fitness

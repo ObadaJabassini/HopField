@@ -13,7 +13,7 @@ namespace TspTest.Genetic
         public PointF Position { set; get; }
         public double DistanceTo(City? another)
         {
-            return Math.Sqrt(Math.Pow(Position.X - another.Position.X, 2) + Math.Pow(Position.Y - another.Position.Y, 2));
+            return Math.Sqrt(Math.Pow(Position.X - another.Value.Position.X, 2) + Math.Pow(Position.Y - another.Value.Position.Y, 2));
         }
 
         public override bool Equals(object obj)
@@ -22,6 +22,16 @@ namespace TspTest.Genetic
                 return false;
             var t = ((City)obj).Position;
             return t.X == this.Position.X && t.Y == this.Position.Y;
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Name.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return this.Name;
         }
     }
 }

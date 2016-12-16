@@ -10,11 +10,36 @@ namespace TspTest.Genetic
     {
         public IList<Path> Paths { get; set; } = new List<Path>();
         public Path Fittest { get { return Paths.OrderByDescending(path => path.Fitness).First(); } }
+
+        public Population()
+        {
+
+        }
+
         public Population(int length)
         {
             for (int i = 0; i < length; i++)
             {
                 Paths.Add(null);
+            }
+        }
+
+        public Population(IList<City> cities, int size = 10)
+        {
+            ISet<Path> paths = new HashSet<Path>();
+            int generated = 0;
+            Random rand = new Random();
+            IEnumerable<int> indices = Enumerable.Range(0, cities.Count);
+            while (generated < size)
+            {
+                var temp = indices.OrderBy(e => rand.Next());
+                Path path = new Path(cities, temp.ToList());
+                if (!paths.Contains(path))
+                {
+                    generated++;
+                    this.Paths.Add(path);
+                    paths.Add(path);
+                }
             }
         }
 
@@ -34,23 +59,9 @@ namespace TspTest.Genetic
             paths.ForEach(Add);
         }
 
-        public Population(IList<City> cities, int size = 10)
+        public override string ToString()
         {
-            ISet<Path> paths = new HashSet<Path>();
-            int generated = 0;
-            Random rand = new Random();
-            IEnumerable<int> indices = Enumerable.Range(0, cities.Count);
-            while(generated < size)
-            {
-                var temp = indices.OrderBy(e => rand.Next());
-                Path path = new Path(cities, temp.ToList());
-                if(!paths.Contains(path))
-                {
-                    generated++;
-                    this.Paths.Add(path);
-                    paths.Add(path);
-                }
-            }
+            return this.Paths.Select(path => path.ToString()).Aggregate((f, s) => f + "\n" + s);
         }
     }
 }
