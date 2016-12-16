@@ -43,24 +43,7 @@ namespace TspTest.Discrete_Hopfield
         public void Solve()
         {
             HopfieldTank nn = new HopfieldTank(this);
-            int e = 0;
-            Tuple<double[,], List<double>> t = new Tuple<double[,], List<double>>(new double[,] {}, new List<double>());
-            while (e++<1000)
-            {
-                t = nn.Analyze();
-                //Print activations
-                for (int i = 0; i < CitiesNumber; i++)
-                {
-                    for (int j = 0; j < CitiesNumber; j++)
-                    {
-                        Console.Write("{0,2} ", Math.Round(t.Item1[i, j]));
-                    }
-                    Console.WriteLine();
-                }
-                Console.WriteLine();
-            }
-
-            t.Item2.ForEach(Console.WriteLine);
+            _generateSolution(nn.Analyze());
         }
 
         //private void _generateSolution(Tuple<Matrix<double>, List<double>> sol)
@@ -69,16 +52,19 @@ namespace TspTest.Discrete_Hopfield
             Console.WriteLine("Energy Values:");
             for (int i = 0; i < sol.Item2.Count; i++)
             {
-                Console.WriteLine("Epoch: {0} => Energy = {1}", i+1, sol.Item2[i]);
+                Console.WriteLine("Epoch: {0} => Energy = {1}", i + 1, sol.Item2[i]);
             }
+
             Console.WriteLine("******************\nTour:");
             for (int i = 0; i < CitiesNumber; i++)
             {
                 for (int j = 0; j < CitiesNumber; j++)
                 {
-                    if(sol.Item1[i+CitiesNumber*j, 0] == 1)
-                        Console.WriteLine("Step: {0} => City: {1}", j, _cities[i].Name);
+                    //if (Math.Round(sol.Item1[i, j]) == 1)
+                    //    Console.WriteLine("Step: {0} => City: {1}", j + 1, _cities[i].Name);
+                    Console.Write("{0,2} ", Math.Round(sol.Item1[i, j]));
                 }
+                Console.WriteLine();
             }
         }
 

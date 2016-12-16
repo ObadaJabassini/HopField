@@ -95,7 +95,7 @@ namespace TspTest.Discrete_Hopfield
                 {
                     for (int j = 0; j < _problem.CitiesNumber; j++)
                     {
-                        Console.Write("{0,2} ",_activations[i+_problem.CitiesNumber*j, 0]);
+                        Console.Write("{0,2} ",_activations[i*_problem.CitiesNumber+i, 0]);
                     }
                     Console.WriteLine();
                 }
@@ -107,7 +107,7 @@ namespace TspTest.Discrete_Hopfield
 
         private IEnumerable<int> _getRandomIndices()
         {
-            IEnumerable<int> set = Enumerable.Range(0, (_problem.CitiesNumber - 1)*(_problem.CitiesNumber - 1));
+            IEnumerable<int> set = Enumerable.Range(0, (_problem.CitiesNumber)*(_problem.CitiesNumber));
             Random rand = new Random();
             IEnumerable<int> indices = set.OrderBy(e => rand.Next());
             return indices;
