@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using Accord.Math;
 using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.Statistics;
 
@@ -16,13 +17,15 @@ namespace TspTest.Discrete_Hopfield
     {
         private List<City> _cities { set; get; }
         public int CitiesNumber { get; }
-        public Matrix<double> D { get; }
+        //public Matrix<double> D { get; }
+        public double[,] D { get; }
 
         public TSP(List<City> cities)
         {
             _cities = cities;
             CitiesNumber = cities.Count;
-            D = Matrix<double>.Build.Dense(cities.Count, cities.Count);
+            //D = Matrix<double>.Build.Dense(cities.Count, cities.Count);
+            D = Matrix.Zeros(cities.Count, cities.Count);
             cities.ForEach(
                 e1 =>
                     cities.ForEach(
@@ -33,7 +36,8 @@ namespace TspTest.Discrete_Hopfield
                                               Math.Pow(e2.Position.Y - e1.Position.Y, 2))));
 
             //Normalize
-            D.Divide(D.Enumerate().Maximum());
+            //D.Divide(D.Enumerate().Maximum());
+            D.Apply(e => e / (D.Max()));
         }
 
         public void Solve()
@@ -42,7 +46,8 @@ namespace TspTest.Discrete_Hopfield
             _generateSolution(nn.Iterate());
         }
 
-        private void _generateSolution(Tuple<Matrix<double>, List<double>> sol)
+        //private void _generateSolution(Tuple<Matrix<double>, List<double>> sol)
+        private void _generateSolution(Tuple<double[,], List<double>> sol)
         {
             Console.WriteLine("Energy Values:");
             for (int i = 0; i < sol.Item2.Count; i++)
