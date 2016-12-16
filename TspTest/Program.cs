@@ -5,6 +5,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TspTest.Genetic;
 
@@ -46,16 +47,20 @@ namespace TspTest
             //l.Add(new City { Name = "city4", Position = new PointF(5, 2) });
             //l.Add(new City { Name = "city5", Position = new PointF(4, 0) });
             //l.Add(new City { Name = "city6", Position = new PointF(1, 0) });
-
-            l.Add(new City { Name = "city2", Position = new PointF(0, 0) });
-            l.Add(new City { Name = "city3", Position = new PointF(35, 0) });
-            l.Add(new City { Name = "city1", Position = new PointF(8, 6) });
-            l.Add(new City { Name = "city4", Position = new PointF(5, 5) });
-
+            //City city1 = new City { Name = "city1", Position = new PointF(8, 6) },
+            //     city2 = new City { Name = "city2", Position = new PointF(0, 0) },
+            //     city3 = new City { Name = "city3", Position = new PointF(35, 0) },
+            //     city4 = new City { Name = "city4", Position = new PointF(4, 3) };
+            //l.Add(city1);
+            //l.Add(city2);
+            //l.Add(city3);
+            //l.Add(city4);
             //TSP prob = new TSP(l);
             //prob.Solve();
-            Genetic.Path path = new GeneticAlgorithm(new Population(l, 10)).Solve();
-            Console.WriteLine(path);
+            int index = 1;
+            File.ReadAllLines(@"D:/tspTest.txt").ToList().ForEach(line => { var vals = Regex.Split(line, " +").Select(e => Convert.ToDouble(e)).ToArray(); l.Add(new City() { Name = "City" + index++, Position = new PointF((float)vals[0], (float)vals[1]) } );});
+            Genetic.Path path = new GeneticAlgorithm(new Population(l, 48)).Solve(10000);
+            Console.WriteLine($"Path = {path.Cities.Select(c => c.Value.ToString()).Aggregate((f, s) => f + "-" + s)}\nCost = {path.Cities.Zip(path.Cities.Skip(1), (f, s) => new Tuple<City?, City?>(f, s)).Select(e => e.Item1.Value.DistanceTo(e.Item2.Value)).Sum()}");
             Console.ReadKey();
         }
     }
