@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -61,22 +61,45 @@ namespace TspTest.Genetic
         {
             var count = first.Cities.Count;
             Random rand = new Random();
-            Path result = new Path(count);
-            int start = rand.Next(0, count - 1),
-                end   = rand.Next(start + 1, count - start - 1);
-            for (int i = start; i <= end; i++)
-            {
-                result[i] = first[i];
-            }
+            //Path result = new Path(count);
+            //int start = rand.Next(0, count - 1),
+            //    end   = rand.Next(start + 1, count - start - 1);
+            //for (int i = start; i <= end; i++)
+            //{
+            //    result[i] = first[i];
+            //}
+            //for (int i = 0; i < count; i++)
+            //{
+            //    result.AddIfNotContains(second[i], i);
+            //}
+            //for (int i = 0; i < count; i++)
+            //{
+            //    result.AddIfNotContains(first[i], i);
+            //}
+            //return result;
+            Path child = new Path(count);
+            int startPos = (int)(rand.NextDouble() * count);
+            int endPos = (int)(rand.NextDouble() * count);
             for (int i = 0; i < count; i++)
             {
-                result.AddIfNotContains(second[i], i);
+                if (startPos < endPos && i > startPos && i < endPos)
+                {
+                    child.AddIfNotContains(first[i], i);
+                } 
+                else if (startPos > endPos)
+                {
+                    if (!(i < startPos && i > endPos))
+                    {
+                        child.AddIfNotContains(first[i], i);
+                    }
+                }
             }
+
             for (int i = 0; i < count; i++)
             {
-                result.AddIfNotContains(first[i], i);
+                child.AddIfNotContains(second[i], i);
             }
-            return result;
+            return child;
         }
 
         private void _mutate(Path path)
