@@ -1,9 +1,10 @@
-﻿using MathNet.Numerics.LinearAlgebra;
+using MathNet.Numerics.LinearAlgebra;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TspTest.Genetic;
 
 namespace TspTest.SimulatedAnnealing
 {
@@ -15,6 +16,20 @@ namespace TspTest.SimulatedAnnealing
         {
             this._distances = distances;
             this._temperature = temperature;
+        }
+
+        public SimulatedAnnealing(IList<City> cities, double temperature = 10000)
+        {
+            this._temperature = temperature;
+            var count = cities.Count;
+            _distances = Matrix<double>.Build.Dense(count, count, 0);
+            for (int i = 0; i < count; i++)
+            {
+                for (int j = 0; j < count; j++)
+                {
+                    _distances[i, j] = cities[i].DistanceTo(cities[j]);
+                }
+            }
         }
 
         public Tuple<IList<int>, double> Solve(double minTemp = 0.01, double coolingFactor = 0.923, double accProb = 0.4)
