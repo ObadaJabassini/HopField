@@ -15,7 +15,7 @@ namespace TspTest.Discrete_Hopfield
 
     class TSP
     {
-        private List<City> _cities { set; get; }
+        private List<TspTest.Discrete_Hopfield.City> _cities { set; get; }
         public int CitiesNumber { get; }
         //public Matrix<double> D { get; }
         public double[,] D { get; }
@@ -40,10 +40,11 @@ namespace TspTest.Discrete_Hopfield
             //D.Apply(e => e / (D.Max()));
         }
 
-        public void Solve()
+        public double[,] Solve()
         {
             HopfieldTank nn = new HopfieldTank(this);
             _generateSolution(nn.Analyze());
+            return solution;
         }
 
         //private void _generateSolution(Tuple<Matrix<double>, List<double>> sol)
@@ -54,7 +55,8 @@ namespace TspTest.Discrete_Hopfield
             {
                 Console.WriteLine("Epoch: {0} => Energy = {1}", i + 1, sol.Item2[i]);
             }
-
+            //gui
+            solution = new double[CitiesNumber, CitiesNumber];
             Console.WriteLine("******************\nTour:");
             for (int i = 0; i < CitiesNumber; i++)
             {
@@ -63,10 +65,15 @@ namespace TspTest.Discrete_Hopfield
                     //if (Math.Round(sol.Item1[i, j]) == 1)
                     //    Console.WriteLine("Step: {0} => City: {1}", j + 1, _cities[i].Name);
                     Console.Write("{0,2} ", Math.Round(sol.Item1[i, j]));
+                    //
+                    solution[i, j] = Math.Round(sol.Item1[i, j]);
+
                 }
                 Console.WriteLine();
             }
         }
+        //gui
+        private double[,] solution = null;
 
 
     }
