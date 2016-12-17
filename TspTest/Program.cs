@@ -60,7 +60,8 @@ namespace TspTest
             //prob.Solve();
 
             //int index = 1;
-            //File.ReadAllLines(@"D:/tspTest.txt").ToList().ForEach(line => { var vals = Regex.Split(line, " +").Select(e => Convert.ToDouble(e)).ToArray(); l.Add(new City() { Name = "City" + index++, Position = new PointF((float)vals[0], (float)vals[1]) } );});
+            //File.ReadAllLines(@"D:/tspTest.txt").ToList().ForEach(line => { var vals = Regex.Split(line, " +").Select(e => Convert.ToDouble(e)).ToArray();
+            //l.Add(new City() { Name = "City" + index++, Position = new PointF((float)vals[0], (float)vals[1]) } );});
             //Genetic.Path path = new GeneticAlgorithm(new Population(l, 48)).Solve(10000);
             //Console.WriteLine($"Path = {path.Cities.Select(c => c.Value.ToString()).Aggregate((f, s) => f + "-" + s)}\nCost = {path.Cities.Zip(path.Cities.Skip(1), (f, s) => new Tuple<City?, City?>(f, s)).Select(e => e.Item1.Value.DistanceTo(e.Item2.Value)).Sum()}");
             //Console.ReadKey();

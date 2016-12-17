@@ -32,8 +32,9 @@
             this.radListView1 = new Telerik.WinControls.UI.RadListView();
             this.radPanel1 = new Telerik.WinControls.UI.RadPanel();
             this.radPanel3 = new Telerik.WinControls.UI.RadPanel();
-            this.radRadioButton3 = new Telerik.WinControls.UI.RadRadioButton();
-            this.radRadioButton2 = new Telerik.WinControls.UI.RadRadioButton();
+            this.HF = new Telerik.WinControls.UI.RadRadioButton();
+            this.GA = new Telerik.WinControls.UI.RadRadioButton();
+            this.radSplitButton1 = new Telerik.WinControls.UI.RadSplitButton();
             this.label3 = new System.Windows.Forms.Label();
             this.MouseCoords_lbl = new System.Windows.Forms.Label();
             this.radButton1 = new Telerik.WinControls.UI.RadButton();
@@ -48,15 +49,16 @@
             this.Pan_tgl = new Telerik.WinControls.UI.RadToggleButton();
             this.radPanel4 = new Telerik.WinControls.UI.RadPanel();
             this.Locations_list = new Telerik.WinControls.UI.RadListView();
-            this.radSplitButton1 = new Telerik.WinControls.UI.RadSplitButton();
+            this.SA = new Telerik.WinControls.UI.RadRadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radListView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).BeginInit();
             this.radPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel3)).BeginInit();
             this.radPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.radRadioButton3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radRadioButton2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.HF)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GA)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radSplitButton1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radButton1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radRadioButton1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Map)).BeginInit();
@@ -69,7 +71,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.radPanel4)).BeginInit();
             this.radPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Locations_list)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radSplitButton1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -117,8 +119,9 @@
             // 
             // radPanel3
             // 
-            this.radPanel3.Controls.Add(this.radRadioButton3);
-            this.radPanel3.Controls.Add(this.radRadioButton2);
+            this.radPanel3.Controls.Add(this.SA);
+            this.radPanel3.Controls.Add(this.HF);
+            this.radPanel3.Controls.Add(this.GA);
             this.radPanel3.Controls.Add(this.radSplitButton1);
             this.radPanel3.Controls.Add(this.label3);
             this.radPanel3.Controls.Add(this.MouseCoords_lbl);
@@ -129,47 +132,57 @@
             this.radPanel3.Size = new System.Drawing.Size(923, 156);
             this.radPanel3.TabIndex = 23;
             // 
-            // radRadioButton3
+            // HF
             // 
-            this.radRadioButton3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.radRadioButton3.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.radRadioButton3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.radRadioButton3.ForeColor = System.Drawing.Color.MediumAquamarine;
-            this.radRadioButton3.Location = new System.Drawing.Point(310, 33);
-            this.radRadioButton3.Name = "radRadioButton3";
-            this.radRadioButton3.Size = new System.Drawing.Size(106, 25);
-            this.radRadioButton3.TabIndex = 17;
-            this.radRadioButton3.Text = "   Hopfield";
-            this.radRadioButton3.ThemeName = "Windows8";
-            this.radRadioButton3.ToggleState = Telerik.WinControls.Enumerations.ToggleState.On;
-            ((Telerik.WinControls.UI.RadRadioButtonElement)(this.radRadioButton3.GetChildAt(0))).ToggleState = Telerik.WinControls.Enumerations.ToggleState.On;
-            ((Telerik.WinControls.UI.RadRadioButtonElement)(this.radRadioButton3.GetChildAt(0))).Text = "   Hopfield";
-            ((Telerik.WinControls.UI.RadRadiomark)(this.radRadioButton3.GetChildAt(0).GetChildAt(1).GetChildAt(1))).BackColor2 = System.Drawing.Color.WhiteSmoke;
-            ((Telerik.WinControls.UI.RadRadiomark)(this.radRadioButton3.GetChildAt(0).GetChildAt(1).GetChildAt(1))).BackColor = System.Drawing.Color.WhiteSmoke;
-            ((Telerik.WinControls.UI.RadRadiomark)(this.radRadioButton3.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Shape = null;
-            ((Telerik.WinControls.Primitives.RadioPrimitive)(this.radRadioButton3.GetChildAt(0).GetChildAt(1).GetChildAt(1).GetChildAt(0))).BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(164)))), ((int)(((byte)(170)))));
-            ((Telerik.WinControls.Primitives.RadioPrimitive)(this.radRadioButton3.GetChildAt(0).GetChildAt(1).GetChildAt(1).GetChildAt(0))).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(164)))), ((int)(((byte)(170)))));
-            ((Telerik.WinControls.Primitives.RadioPrimitive)(this.radRadioButton3.GetChildAt(0).GetChildAt(1).GetChildAt(1).GetChildAt(0))).Visibility = Telerik.WinControls.ElementVisibility.Visible;
+            this.HF.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.HF.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.HF.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.HF.ForeColor = System.Drawing.Color.MediumAquamarine;
+            this.HF.Location = new System.Drawing.Point(315, 5);
+            this.HF.Name = "HF";
+            this.HF.Size = new System.Drawing.Size(106, 25);
+            this.HF.TabIndex = 17;
+            this.HF.Text = "   Hopfield";
+            this.HF.ThemeName = "Windows8";
+            this.HF.ToggleState = Telerik.WinControls.Enumerations.ToggleState.On;
+            ((Telerik.WinControls.UI.RadRadioButtonElement)(this.HF.GetChildAt(0))).ToggleState = Telerik.WinControls.Enumerations.ToggleState.On;
+            ((Telerik.WinControls.UI.RadRadioButtonElement)(this.HF.GetChildAt(0))).Text = "   Hopfield";
+            ((Telerik.WinControls.UI.RadRadiomark)(this.HF.GetChildAt(0).GetChildAt(1).GetChildAt(1))).BackColor2 = System.Drawing.Color.WhiteSmoke;
+            ((Telerik.WinControls.UI.RadRadiomark)(this.HF.GetChildAt(0).GetChildAt(1).GetChildAt(1))).BackColor = System.Drawing.Color.WhiteSmoke;
+            ((Telerik.WinControls.UI.RadRadiomark)(this.HF.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Shape = null;
+            ((Telerik.WinControls.Primitives.RadioPrimitive)(this.HF.GetChildAt(0).GetChildAt(1).GetChildAt(1).GetChildAt(0))).BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(164)))), ((int)(((byte)(170)))));
+            ((Telerik.WinControls.Primitives.RadioPrimitive)(this.HF.GetChildAt(0).GetChildAt(1).GetChildAt(1).GetChildAt(0))).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(164)))), ((int)(((byte)(170)))));
+            ((Telerik.WinControls.Primitives.RadioPrimitive)(this.HF.GetChildAt(0).GetChildAt(1).GetChildAt(1).GetChildAt(0))).Visibility = Telerik.WinControls.ElementVisibility.Visible;
             // 
-            // radRadioButton2
+            // GA
             // 
-            this.radRadioButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.radRadioButton2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.radRadioButton2.ForeColor = System.Drawing.Color.MediumAquamarine;
-            this.radRadioButton2.Location = new System.Drawing.Point(310, 64);
-            this.radRadioButton2.Name = "radRadioButton2";
-            this.radRadioButton2.Size = new System.Drawing.Size(181, 25);
-            this.radRadioButton2.TabIndex = 16;
-            this.radRadioButton2.TabStop = false;
-            this.radRadioButton2.Text = "   Genetic Algorithm";
-            this.radRadioButton2.ThemeName = "Windows8";
-            ((Telerik.WinControls.UI.RadRadioButtonElement)(this.radRadioButton2.GetChildAt(0))).Text = "   Genetic Algorithm";
-            ((Telerik.WinControls.UI.RadRadiomark)(this.radRadioButton2.GetChildAt(0).GetChildAt(1).GetChildAt(1))).BackColor2 = System.Drawing.Color.WhiteSmoke;
-            ((Telerik.WinControls.UI.RadRadiomark)(this.radRadioButton2.GetChildAt(0).GetChildAt(1).GetChildAt(1))).BackColor = System.Drawing.Color.WhiteSmoke;
-            ((Telerik.WinControls.UI.RadRadiomark)(this.radRadioButton2.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Shape = null;
-            ((Telerik.WinControls.Primitives.RadioPrimitive)(this.radRadioButton2.GetChildAt(0).GetChildAt(1).GetChildAt(1).GetChildAt(0))).BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(164)))), ((int)(((byte)(170)))));
-            ((Telerik.WinControls.Primitives.RadioPrimitive)(this.radRadioButton2.GetChildAt(0).GetChildAt(1).GetChildAt(1).GetChildAt(0))).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(164)))), ((int)(((byte)(170)))));
-            ((Telerik.WinControls.Primitives.RadioPrimitive)(this.radRadioButton2.GetChildAt(0).GetChildAt(1).GetChildAt(1).GetChildAt(0))).Visibility = Telerik.WinControls.ElementVisibility.Hidden;
+            this.GA.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.GA.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.GA.ForeColor = System.Drawing.Color.MediumAquamarine;
+            this.GA.Location = new System.Drawing.Point(315, 36);
+            this.GA.Name = "GA";
+            this.GA.Size = new System.Drawing.Size(181, 25);
+            this.GA.TabIndex = 16;
+            this.GA.TabStop = false;
+            this.GA.Text = "   Genetic Algorithm";
+            this.GA.ThemeName = "Windows8";
+            ((Telerik.WinControls.UI.RadRadioButtonElement)(this.GA.GetChildAt(0))).Text = "   Genetic Algorithm";
+            ((Telerik.WinControls.UI.RadRadiomark)(this.GA.GetChildAt(0).GetChildAt(1).GetChildAt(1))).BackColor2 = System.Drawing.Color.WhiteSmoke;
+            ((Telerik.WinControls.UI.RadRadiomark)(this.GA.GetChildAt(0).GetChildAt(1).GetChildAt(1))).BackColor = System.Drawing.Color.WhiteSmoke;
+            ((Telerik.WinControls.UI.RadRadiomark)(this.GA.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Shape = null;
+            ((Telerik.WinControls.Primitives.RadioPrimitive)(this.GA.GetChildAt(0).GetChildAt(1).GetChildAt(1).GetChildAt(0))).BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(164)))), ((int)(((byte)(170)))));
+            ((Telerik.WinControls.Primitives.RadioPrimitive)(this.GA.GetChildAt(0).GetChildAt(1).GetChildAt(1).GetChildAt(0))).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(164)))), ((int)(((byte)(170)))));
+            ((Telerik.WinControls.Primitives.RadioPrimitive)(this.GA.GetChildAt(0).GetChildAt(1).GetChildAt(1).GetChildAt(0))).Visibility = Telerik.WinControls.ElementVisibility.Hidden;
+            // 
+            // radSplitButton1
+            // 
+            this.radSplitButton1.Location = new System.Drawing.Point(12, 120);
+            this.radSplitButton1.Name = "radSplitButton1";
+            this.radSplitButton1.Size = new System.Drawing.Size(114, 24);
+            this.radSplitButton1.TabIndex = 0;
+            this.radSplitButton1.Text = "radSplitButton1";
+            this.radSplitButton1.ThemeName = "Windows8";
+            this.radSplitButton1.Visible = false;
             // 
             // label3
             // 
@@ -201,9 +214,9 @@
             // 
             this.radButton1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.radButton1.Location = new System.Drawing.Point(496, 94);
+            this.radButton1.Location = new System.Drawing.Point(530, 94);
             this.radButton1.Name = "radButton1";
-            this.radButton1.Size = new System.Drawing.Size(209, 53);
+            this.radButton1.Size = new System.Drawing.Size(175, 53);
             this.radButton1.TabIndex = 12;
             this.radButton1.Text = "radButton1";
             this.radButton1.ThemeName = "Windows8";
@@ -392,15 +405,25 @@
             ((Telerik.WinControls.UI.SimpleListViewElement)(this.Locations_list.GetChildAt(0).GetChildAt(0))).SelectionRectangleColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             ((Telerik.WinControls.UI.SimpleListViewElement)(this.Locations_list.GetChildAt(0).GetChildAt(0))).SelectionRectangleBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             // 
-            // radSplitButton1
+            // SA
             // 
-            this.radSplitButton1.Location = new System.Drawing.Point(12, 120);
-            this.radSplitButton1.Name = "radSplitButton1";
-            this.radSplitButton1.Size = new System.Drawing.Size(114, 24);
-            this.radSplitButton1.TabIndex = 0;
-            this.radSplitButton1.Text = "radSplitButton1";
-            this.radSplitButton1.ThemeName = "Windows8";
-            this.radSplitButton1.Visible = false;
+            this.SA.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.SA.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.SA.ForeColor = System.Drawing.Color.MediumAquamarine;
+            this.SA.Location = new System.Drawing.Point(314, 66);
+            this.SA.Name = "SA";
+            this.SA.Size = new System.Drawing.Size(200, 25);
+            this.SA.TabIndex = 17;
+            this.SA.TabStop = false;
+            this.SA.Text = "   Simulated Annealing";
+            this.SA.ThemeName = "Windows8";
+            ((Telerik.WinControls.UI.RadRadioButtonElement)(this.SA.GetChildAt(0))).Text = "   Simulated Annealing";
+            ((Telerik.WinControls.UI.RadRadiomark)(this.SA.GetChildAt(0).GetChildAt(1).GetChildAt(1))).BackColor2 = System.Drawing.Color.WhiteSmoke;
+            ((Telerik.WinControls.UI.RadRadiomark)(this.SA.GetChildAt(0).GetChildAt(1).GetChildAt(1))).BackColor = System.Drawing.Color.WhiteSmoke;
+            ((Telerik.WinControls.UI.RadRadiomark)(this.SA.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Shape = null;
+            ((Telerik.WinControls.Primitives.RadioPrimitive)(this.SA.GetChildAt(0).GetChildAt(1).GetChildAt(1).GetChildAt(0))).BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(164)))), ((int)(((byte)(170)))));
+            ((Telerik.WinControls.Primitives.RadioPrimitive)(this.SA.GetChildAt(0).GetChildAt(1).GetChildAt(1).GetChildAt(0))).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(164)))), ((int)(((byte)(170)))));
+            ((Telerik.WinControls.Primitives.RadioPrimitive)(this.SA.GetChildAt(0).GetChildAt(1).GetChildAt(1).GetChildAt(0))).Visibility = Telerik.WinControls.ElementVisibility.Hidden;
             // 
             // RadForm2
             // 
@@ -426,8 +449,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.radPanel3)).EndInit();
             this.radPanel3.ResumeLayout(false);
             this.radPanel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.radRadioButton3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radRadioButton2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.HF)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GA)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radSplitButton1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radButton1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radRadioButton1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Map)).EndInit();
@@ -441,7 +465,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.radPanel4)).EndInit();
             this.radPanel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Locations_list)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radSplitButton1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SA)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -454,8 +478,8 @@
         private Telerik.WinControls.UI.RadListView radListView1;
         private Telerik.WinControls.UI.RadPanel radPanel1;
         private Telerik.WinControls.UI.RadPanel radPanel3;
-        private Telerik.WinControls.UI.RadRadioButton radRadioButton3;
-        private Telerik.WinControls.UI.RadRadioButton radRadioButton2;
+        private Telerik.WinControls.UI.RadRadioButton HF;
+        private Telerik.WinControls.UI.RadRadioButton GA;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label MouseCoords_lbl;
         private Telerik.WinControls.UI.RadButton radButton1;
@@ -471,5 +495,6 @@
         private Telerik.WinControls.UI.RadPanel radPanel4;
         private Telerik.WinControls.UI.RadListView Locations_list;
         private Telerik.WinControls.UI.RadSplitButton radSplitButton1;
+        private Telerik.WinControls.UI.RadRadioButton SA;
     }
 }

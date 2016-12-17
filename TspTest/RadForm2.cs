@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Accord.Math;
@@ -11,6 +12,7 @@ using Telerik.WinControls;
 using Telerik.WinControls.UI;
 using Telerik.Windows.Diagrams.Core;
 using TspTest.Discrete_Hopfield;
+using TspTest.Genetic;
 using City = TspTest.Genetic.City;
 using Point = System.Drawing.Point;
 
@@ -31,7 +33,8 @@ namespace TspTest
             get { return Cities.Count; }
         }
 
-        List<TspTest.Discrete_Hopfield.City> l = new List<TspTest.Discrete_Hopfield.City>();
+        List<TspTest.Discrete_Hopfield.City> LH = new List<TspTest.Discrete_Hopfield.City>();
+        IList<City> LG = new List<City>(); 
         Point MousPosition = new Point();
 
         public RadForm2()
@@ -54,7 +57,8 @@ namespace TspTest
                 CityShape city = new CityShape(MousPosition);
                 city.Click += this.CityOnDrag;
                 Map.AddShape(city);
-                l.Add(new TspTest.Discrete_Hopfield.City { Name = "City"+(CountCities-1), Position = MousPosition });
+                LH.Add(new TspTest.Discrete_Hopfield.City { Name = "City"+(CountCities-1), Position = MousPosition });
+                LG.Insert(CountCities - 1, new City { Name = "City" + (CountCities - 1), Position = MousPosition });
             }
         }
 
@@ -122,36 +126,67 @@ namespace TspTest
 
         private void radButton1_Click(object sender, EventArgs e)
         {
-
-            TSP prob = new TSP(l);
-            double[,] solution =prob.Solve();
-
-            for (int j = 0; j < CountCities; j++)
+            double[,] solution;
+            if (HF.IsChecked)
             {
-                for (int i = 0; i < CountCities; i++)
-                {   
-                    if (solution[i, j] == 1)
+                TSP prob = new TSP(LH);
+                solution = prob.Solve();
+                for (int j = 0; j < CountCities; j++)
+                {
+                    for (int i = 0; i < CountCities; i++)
                     {
-                        Map.AddConnection(j == 0 ? Cities[i] : Map.Connections[Map.Connections.Count - 1].Target,
-                            Cities[i]);
+                        if (solution[i, j] == 1)
+                        {
+                            Map.AddConnection(j == 0 ? Cities[i] : Map.Connections[Map.Connections.Count - 1].Target,
+                                Cities[i]);
 
-                        RadDiagramConnection connection1 = (RadDiagramConnection)Map.Connections[Map.Connections.Count - 1];
-                        connection1.BackColor = Color.LightSalmon;
-                        connection1.AllowDelete = false;
-                        connection1.IsDraggingEnabled = false;
-                        connection1.IsEditable = false;
-                        connection1.TargetCapSize = new SizeF(20, 25);
-                        connection1.IsHitTestVisible = true;
-                        connection1.Content = j + 1;
-                        connection1.ForeColor = Color.LightSalmon;
-                        connection1.Font = MouseCoords_lbl.Font;
-                        Map.Refresh();
-                        //connection1.Position = connection1.Target.Position;
-                        System.Windows.Forms.Application.DoEvents();
-                        break;
+                            RadDiagramConnection connection1 =
+                                (RadDiagramConnection) Map.Connections[Map.Connections.Count - 1];
+                            connection1.BackColor = Color.LightSalmon;
+                            connection1.AllowDelete = false;
+                            connection1.IsDraggingEnabled = false;
+                            connection1.IsEditable = false;
+                            connection1.TargetCapSize = new SizeF(20, 25);
+                            connection1.IsHitTestVisible = true;
+                            connection1.Content = j + 1;
+                            connection1.ForeColor = Color.LightSalmon;
+                            connection1.Font = MouseCoords_lbl.Font;
+                            Map.Refresh();
+                            //connection1.Position = connection1.Target.Position;
+                            System.Windows.Forms.Application.DoEvents();
+                            break;
+                        }
                     }
                 }
             }
+            if (GA.IsChecked)
+            {
+                int j = 0;
+                Genetic.Path path = new GeneticAlgorithm(new Population(LG)).Solve(10000);
+                foreach (var city in path.Cities)
+                {
+                    Map.AddConnection(j == 0 ? Cities[j] : Map.Connections[Map.Connections.Count - 1].Target,
+                        Cities[j]);
+
+                    RadDiagramConnection connection1 =
+                        (RadDiagramConnection) Map.Connections[Map.Connections.Count - 1];
+                    connection1.BackColor = Color.LightSalmon;
+                    connection1.AllowDelete = false;
+                    connection1.IsDraggingEnabled = false;
+                    connection1.IsEditable = false;
+                    connection1.TargetCapSize = new SizeF(20, 25);
+                    connection1.IsHitTestVisible = true;
+                    connection1.Content = j + 1;
+                    connection1.ForeColor = Color.LightSalmon;
+                    connection1.Font = MouseCoords_lbl.Font;
+                    Map.Refresh();
+                    //connection1.Position = connection1.Target.Position;
+                    System.Windows.Forms.Application.DoEvents();
+
+                    j++;
+                }
+            }
+
             //int k = 0;
             //foreach (RadDiagramConnection road in Map.Connections)
             //{
