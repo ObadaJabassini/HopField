@@ -186,7 +186,31 @@ namespace TspTest
                     j++;
                 }
             }
+            if (SA.IsChecked)
+            {
+                var result = new SimulatedAnnealing.SimulatedAnnealing(LG).Solve();
+                for (int j = 0; j < CountCities; j++)
+                {
+                    Map.AddConnection(j == 0 ? Cities[j] : Map.Connections[Map.Connections.Count - 1].Target,
+                        Cities[j]);
 
+                    RadDiagramConnection connection1 =
+                        (RadDiagramConnection)Map.Connections[Map.Connections.Count - 1];
+                    connection1.BackColor = Color.LightSalmon;
+                    connection1.AllowDelete = false;
+                    connection1.IsDraggingEnabled = false;
+                    connection1.IsEditable = false;
+                    connection1.TargetCapSize = new SizeF(20, 25);
+                    connection1.IsHitTestVisible = true;
+                    connection1.Content = j + 1;
+                    connection1.ForeColor = Color.LightSalmon;
+                    connection1.Font = MouseCoords_lbl.Font;
+                    Map.Refresh();
+                    //connection1.Position = connection1.Target.Position;
+                    System.Windows.Forms.Application.DoEvents();
+
+                }
+            }
             //int k = 0;
             //foreach (RadDiagramConnection road in Map.Connections)
             //{
