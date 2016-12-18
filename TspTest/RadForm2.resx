@@ -126,6 +126,9 @@
   <metadata name="chamferedRectShape1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 56</value>
   </metadata>
+  <data name="Map.SerializedXml" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;RadDiagram Version="2015.3"&gt;&lt;Metadata Type="Telerik.WinControls.UI.RadDiagramElement" Id="69f8e7eb-32c0-4cee-a6a6-3e6bed9d4bab" Zoom="1" Position="0;0" IsZoomEnabled="false"&gt;&lt;Title&gt;Diagram [12/18/2016 4:23:39 AM]&lt;/Title&gt;&lt;Description&gt;&lt;/Description&gt;&lt;/Metadata&gt;&lt;Groups /&gt;&lt;Shapes /&gt;&lt;Connections /&gt;&lt;/RadDiagram&gt;</value>
+  </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>25</value>
   </metadata>

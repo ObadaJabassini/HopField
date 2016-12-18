@@ -108,6 +108,9 @@
     <Content Include="distances.txt" />
     <Content Include="move.png" />
     <Content Include="plus%281%29.png" />
+    <None Include="Resources\folder.png" />
+    <None Include="Resources\eraser.png" />
+    <None Include="Resources\presentation.png" />
     <Content Include="ruler.png" />
   </ItemGroup>
   <ItemGroup>
