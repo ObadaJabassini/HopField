@@ -11,7 +11,6 @@ using ANN.Resources;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
 using Telerik.Windows.Diagrams.Core;
-using TspTest.Discrete_Hopfield;
 using TspTest.Genetic;
 using City = TspTest.Genetic.City;
 using Point = System.Drawing.Point;
@@ -33,8 +32,8 @@ namespace TspTest
             get { return Cities.Count; }
         }
 
-        List<TspTest.Discrete_Hopfield.City> LH = new List<TspTest.Discrete_Hopfield.City>();
-        IList<City> LG = new List<City>(); 
+        List<City> LH = new List<City>();
+        IList<Genetic.City> LG = new List<Genetic.City>(); 
         Point MousPosition = new Point();
 
         public RadForm2()
@@ -57,8 +56,8 @@ namespace TspTest
                 CityShape city = new CityShape(MousPosition);
                 city.Click += this.CityOnDrag;
                 Map.AddShape(city);
-                LH.Add(new TspTest.Discrete_Hopfield.City { Name = "City"+(CountCities-1), Position = MousPosition });
-                LG.Insert(CountCities - 1, new City { Name = "City" + (CountCities - 1), Position = MousPosition });
+                LH.Add(new City { Name = "City"+(CountCities-1), Position = MousPosition });
+                LG.Insert(CountCities - 1, new Genetic.City { Name = "City" + (CountCities - 1), Position = MousPosition });
             }
         }
 

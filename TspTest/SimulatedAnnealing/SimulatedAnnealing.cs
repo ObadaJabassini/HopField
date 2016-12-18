@@ -18,7 +18,7 @@ namespace TspTest.SimulatedAnnealing
             this._temperature = temperature;
         }
 
-        public SimulatedAnnealing(IList<City> cities, double temperature = 10000)
+        public SimulatedAnnealing(IList<Genetic.City> cities, double temperature = 10000)
         {
             this._temperature = temperature;
             var count = cities.Count;
