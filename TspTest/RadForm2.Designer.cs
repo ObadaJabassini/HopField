@@ -46,6 +46,8 @@
             this.chamferedRectShape1 = new Telerik.WinControls.ChamferedRectShape();
             this.Map = new Telerik.WinControls.UI.RadDiagram();
             this.radGroupBox1 = new Telerik.WinControls.UI.RadGroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -54,11 +56,10 @@
             this.AddCity_tgl = new Telerik.WinControls.UI.RadToggleButton();
             this.Pan_tgl = new Telerik.WinControls.UI.RadToggleButton();
             this.radPanel4 = new Telerik.WinControls.UI.RadPanel();
+            this.Distance_lbl = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.Locations_list = new Telerik.WinControls.UI.RadListView();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.Energy_list = new Telerik.WinControls.UI.RadListView();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radListView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).BeginInit();
@@ -85,7 +86,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.Pan_tgl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel4)).BeginInit();
             this.radPanel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Locations_list)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Energy_list)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -339,6 +340,28 @@
             ((Telerik.WinControls.Primitives.BorderPrimitive)(this.radGroupBox1.GetChildAt(0).GetChildAt(1).GetChildAt(1))).ForeColor = System.Drawing.Color.MediumAquamarine;
             ((Telerik.WinControls.Primitives.BorderPrimitive)(this.radGroupBox1.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Strikeout);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.label5.ForeColor = System.Drawing.Color.Gainsboro;
+            this.label5.Location = new System.Drawing.Point(26, 209);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(97, 19);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Delete Roads";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.label4.ForeColor = System.Drawing.Color.Gainsboro;
+            this.label4.Location = new System.Drawing.Point(55, 107);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(39, 19);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "New";
+            // 
             // pictureBox2
             // 
             this.pictureBox2.Location = new System.Drawing.Point(95, 180);
@@ -476,16 +499,29 @@
             // 
             this.radPanel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.radPanel4.AutoSize = true;
             this.radPanel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            this.radPanel4.Controls.Add(this.Energy_list);
+            this.radPanel4.Controls.Add(this.Distance_lbl);
             this.radPanel4.Controls.Add(this.label2);
             this.radPanel4.Controls.Add(this.label1);
-            this.radPanel4.Controls.Add(this.Locations_list);
-            this.radPanel4.Location = new System.Drawing.Point(707, 6);
+            this.radPanel4.Location = new System.Drawing.Point(707, 3);
             this.radPanel4.Name = "radPanel4";
-            this.radPanel4.Size = new System.Drawing.Size(628, 2390);
+            this.radPanel4.Size = new System.Drawing.Size(628, 2393);
             this.radPanel4.TabIndex = 15;
             this.radPanel4.Text = "radPanel4";
+            // 
+            // Distance_lbl
+            // 
+            this.Distance_lbl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Distance_lbl.AutoSize = true;
+            this.Distance_lbl.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.Distance_lbl.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.Distance_lbl.Location = new System.Drawing.Point(91, 32);
+            this.Distance_lbl.Name = "Distance_lbl";
+            this.Distance_lbl.Size = new System.Drawing.Size(19, 21);
+            this.Distance_lbl.TabIndex = 18;
+            this.Distance_lbl.Text = "0";
             // 
             // label2
             // 
@@ -494,7 +530,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.label2.Location = new System.Drawing.Point(27, 4);
+            this.label2.Location = new System.Drawing.Point(27, 11);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(174, 21);
             this.label2.TabIndex = 18;
@@ -507,60 +543,39 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.label1.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.label1.Location = new System.Drawing.Point(94, 1212);
+            this.label1.Location = new System.Drawing.Point(94, 1218);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 21);
             this.label1.TabIndex = 18;
             this.label1.Text = "{X,Y}";
             // 
-            // Locations_list
+            // Energy_list
             // 
-            this.Locations_list.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.Energy_list.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Locations_list.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.Locations_list.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.Locations_list.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.Locations_list.Location = new System.Drawing.Point(4, 56);
-            this.Locations_list.Name = "Locations_list";
-            this.Locations_list.Size = new System.Drawing.Size(624, 2334);
-            this.Locations_list.TabIndex = 0;
-            this.Locations_list.Text = "radListView2";
-            this.Locations_list.ThemeName = "VisualStudio2012Dark";
-            ((Telerik.WinControls.UI.RadListViewElement)(this.Locations_list.GetChildAt(0))).BorderWidth = 10F;
-            ((Telerik.WinControls.UI.RadListViewElement)(this.Locations_list.GetChildAt(0))).BorderLeftWidth = 10F;
-            ((Telerik.WinControls.UI.RadListViewElement)(this.Locations_list.GetChildAt(0))).BorderTopWidth = 10F;
-            ((Telerik.WinControls.UI.RadListViewElement)(this.Locations_list.GetChildAt(0))).BorderRightWidth = 10F;
-            ((Telerik.WinControls.UI.RadListViewElement)(this.Locations_list.GetChildAt(0))).BorderBottomWidth = 10F;
-            ((Telerik.WinControls.UI.RadListViewElement)(this.Locations_list.GetChildAt(0))).BorderLeftColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            ((Telerik.WinControls.UI.RadListViewElement)(this.Locations_list.GetChildAt(0))).BorderTopColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            ((Telerik.WinControls.UI.RadListViewElement)(this.Locations_list.GetChildAt(0))).BorderRightColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            ((Telerik.WinControls.UI.RadListViewElement)(this.Locations_list.GetChildAt(0))).BorderBottomColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            ((Telerik.WinControls.UI.RadListViewElement)(this.Locations_list.GetChildAt(0))).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            ((Telerik.WinControls.UI.SimpleListViewElement)(this.Locations_list.GetChildAt(0).GetChildAt(0))).SelectionRectangleColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            ((Telerik.WinControls.UI.SimpleListViewElement)(this.Locations_list.GetChildAt(0).GetChildAt(0))).SelectionRectangleBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.label4.ForeColor = System.Drawing.Color.Gainsboro;
-            this.label4.Location = new System.Drawing.Point(55, 107);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(39, 19);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "New";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.label5.ForeColor = System.Drawing.Color.Gainsboro;
-            this.label5.Location = new System.Drawing.Point(26, 209);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(97, 19);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Delete Roads";
+            this.Energy_list.AutoScroll = true;
+            this.Energy_list.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            this.Energy_list.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.Energy_list.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.Energy_list.Location = new System.Drawing.Point(3, 64);
+            this.Energy_list.Name = "Energy_list";
+            this.Energy_list.Size = new System.Drawing.Size(210, 300);
+            this.Energy_list.TabIndex = 0;
+            this.Energy_list.Text = "radListView2";
+            this.Energy_list.ThemeName = "VisualStudio2012Dark";
+            ((Telerik.WinControls.UI.RadListViewElement)(this.Energy_list.GetChildAt(0))).BorderWidth = 10F;
+            ((Telerik.WinControls.UI.RadListViewElement)(this.Energy_list.GetChildAt(0))).BorderLeftWidth = 10F;
+            ((Telerik.WinControls.UI.RadListViewElement)(this.Energy_list.GetChildAt(0))).BorderTopWidth = 10F;
+            ((Telerik.WinControls.UI.RadListViewElement)(this.Energy_list.GetChildAt(0))).BorderRightWidth = 10F;
+            ((Telerik.WinControls.UI.RadListViewElement)(this.Energy_list.GetChildAt(0))).BorderBottomWidth = 10F;
+            ((Telerik.WinControls.UI.RadListViewElement)(this.Energy_list.GetChildAt(0))).BorderLeftColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            ((Telerik.WinControls.UI.RadListViewElement)(this.Energy_list.GetChildAt(0))).BorderTopColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            ((Telerik.WinControls.UI.RadListViewElement)(this.Energy_list.GetChildAt(0))).BorderRightColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            ((Telerik.WinControls.UI.RadListViewElement)(this.Energy_list.GetChildAt(0))).BorderBottomColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            ((Telerik.WinControls.UI.RadListViewElement)(this.Energy_list.GetChildAt(0))).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            ((Telerik.WinControls.UI.SimpleListViewElement)(this.Energy_list.GetChildAt(0).GetChildAt(0))).SelectionRectangleColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            ((Telerik.WinControls.UI.SimpleListViewElement)(this.Energy_list.GetChildAt(0).GetChildAt(0))).SelectionRectangleBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             // 
             // RadForm2
             // 
@@ -594,7 +609,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.radRadioButton1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Map)).EndInit();
             this.Map.ResumeLayout(false);
-            this.Map.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radGroupBox1)).EndInit();
             this.radGroupBox1.ResumeLayout(false);
             this.radGroupBox1.PerformLayout();
@@ -609,7 +623,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.radPanel4)).EndInit();
             this.radPanel4.ResumeLayout(false);
             this.radPanel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Locations_list)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Energy_list)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -637,7 +651,7 @@
         private Telerik.WinControls.UI.RadToggleButton AddCity_tgl;
         private Telerik.WinControls.UI.RadToggleButton Pan_tgl;
         private Telerik.WinControls.UI.RadPanel radPanel4;
-        private Telerik.WinControls.UI.RadListView Locations_list;
+        private Telerik.WinControls.UI.RadListView Energy_list;
         private Telerik.WinControls.UI.RadSplitButton radSplitButton1;
         private Telerik.WinControls.UI.RadRadioButton SA;
         private Telerik.WinControls.UI.RadGroupBox radGroupBox1;
@@ -648,5 +662,6 @@
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label Distance_lbl;
     }
 }

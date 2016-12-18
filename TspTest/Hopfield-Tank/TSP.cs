@@ -32,14 +32,14 @@ namespace TspTest
                                               Math.Pow(e2.Position.Y - e1.Position.Y, 2))));
         }
 
-        public double[,] Solve()
+        public Tuple<double[,], List<double>> Solve()
         {
             HopfieldTank nn = new HopfieldTank(this);
-            _generateSolution(nn.Analyze());
-            return solution;
+            return _generateSolution(nn.Analyze());
+            
         }
 
-        private void _generateSolution(Tuple<double[,], List<double>> sol)
+        private Tuple<double[,], List<double>> _generateSolution(Tuple<double[,], List<double>> sol)
         {
             Console.WriteLine("Energy Values:");
             for (int i = 0; i < sol.Item2.Count; i++)
@@ -47,7 +47,7 @@ namespace TspTest
                 Console.WriteLine("Epoch: {0} => Energy = {1}", i + 1, sol.Item2[i]);
             }
             //gui
-            solution = new double[CitiesNumber, CitiesNumber];
+            double[,] trans = new double[CitiesNumber, CitiesNumber];
             Console.WriteLine("******************\nTour:");
             for (int i = 0; i < CitiesNumber; i++)
             {
@@ -55,15 +55,13 @@ namespace TspTest
                 {
                     Console.Write("{0,2} ", Math.Round(sol.Item1[i, j]));
                     //
-                    solution[i, j] = Math.Round(sol.Item1[i, j]);
+                    trans[i, j] = Math.Round(sol.Item1[i, j]);
 
                 }
                 Console.WriteLine();
             }
+            return new Tuple<double[,], List<double>>(trans,sol.Item2);
         }
-        //gui
-        private double[,] solution = null;
-
 
     }
 }

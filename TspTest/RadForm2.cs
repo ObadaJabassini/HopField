@@ -125,16 +125,17 @@ namespace TspTest
 
         private void radButton1_Click(object sender, EventArgs e)
         {
-            double[,] solution;
+            
             if (HF.IsChecked)
             {
+                Tuple<double[,], List<double>> solution;
                 TSP prob = new TSP(LH);
                 solution = prob.Solve();
                 for (int j = 0; j < CountCities; j++)
                 {
                     for (int i = 0; i < CountCities; i++)
                     {
-                        if (solution[i, j] == 1)
+                        if (solution.Item1[i, j] == 1)
                         {
                             Map.AddConnection(j == 0 ? Cities[i] : Map.Connections[Map.Connections.Count - 1].Target,
                                 Cities[i]);
@@ -150,6 +151,9 @@ namespace TspTest
                             connection1.Content = j + 1;
                             connection1.ForeColor = Color.LightSalmon;
                             connection1.Font = MouseCoords_lbl.Font;
+                            Distance_lbl.Text =
+                                (Convert.ToInt32(Distance_lbl.Text) +
+                                 (connection1.StartPoint - connection1.EndPoint).LengthSquared).ToString();
                             Map.Refresh();
                             //connection1.Position = connection1.Target.Position;
                             System.Windows.Forms.Application.DoEvents();
@@ -157,6 +161,11 @@ namespace TspTest
                         }
                     }
                 }
+                for (int i = 0; i < solution.Item2.Count; i++)
+                {
+                    Energy_list.Items.Add("Epoch: {0} => Energy = {1}", i + 1, solution.Item2[i]);
+                }
+                
             }
             if (GA.IsChecked)
             {
