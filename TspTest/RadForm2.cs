@@ -12,6 +12,7 @@ using Telerik.WinControls;
 using Telerik.WinControls.UI;
 using Telerik.Windows.Diagrams.Core;
 using TspTest.Genetic;
+using TspTest.Properties;
 using City = TspTest.Genetic.City;
 using Point = System.Drawing.Point;
 
@@ -39,6 +40,9 @@ namespace TspTest
         public RadForm2()
         {
             InitializeComponent();
+            pictureBox3.Image = Resources.presentation;
+            pictureBox1.Image = Resources.folder;
+            pictureBox2.Image = Resources.eraser;
         }
         private void CityOnDrag(object sender, EventArgs eventArgs)
         {
@@ -125,7 +129,7 @@ namespace TspTest
 
         private void radButton1_Click(object sender, EventArgs e)
         {
-            
+            Distance_lbl.Text = "0";
             if (HF.IsChecked)
             {
                 Tuple<double[,], List<double>> solution;
@@ -187,6 +191,10 @@ namespace TspTest
                     connection1.Content = j + 1;
                     connection1.ForeColor = Color.LightSalmon;
                     connection1.Font = MouseCoords_lbl.Font;
+                    Distance_lbl.Text =
+                                (Convert.ToInt32(Distance_lbl.Text) +
+                                 (connection1.StartPoint - connection1.EndPoint).LengthSquared).ToString();
+                            Energy_list.Items.Clear();
                     Map.Refresh();
                     //connection1.Position = connection1.Target.Position;
                     System.Windows.Forms.Application.DoEvents();
@@ -213,6 +221,10 @@ namespace TspTest
                     connection1.Content = j + 1;
                     connection1.ForeColor = Color.LightSalmon;
                     connection1.Font = MouseCoords_lbl.Font;
+                    Distance_lbl.Text =
+                                (Convert.ToInt32(Distance_lbl.Text) +
+                                 (connection1.StartPoint - connection1.EndPoint).LengthSquared).ToString();
+                    Energy_list.Items.Clear();
                     Map.Refresh();
                     //connection1.Position = connection1.Target.Position;
                     System.Windows.Forms.Application.DoEvents();
@@ -244,12 +256,29 @@ namespace TspTest
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-
+            for (int i = 0; i < CountCities; i++)
+            {
+                Map.RemoveConnection(Map.Connections[0]);
+            }
         }
 
         private void pictureBox3_Click(object sender, EventArgs e)
         {
-
+            //ShapeCollection collection = Cities;
+            //CityShape[] k=new CityShape[CountCities];
+            ////collection.CopyTo(k, 0);
+            //Map.Shapes.CopyTo(k,0 );
+           
+            //Map.Clear();
+            //for (int i = 0; i < CountCities; i++)
+            //{
+            //    Map.AddShape(k[i]);
+            //}
+            //Map.Refresh();
+            for (int i = 0; i < CountCities; i++)
+            {
+                Map.RemoveConnection(Map.Connections[0]);
+            }
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

@@ -56,10 +56,10 @@
             this.AddCity_tgl = new Telerik.WinControls.UI.RadToggleButton();
             this.Pan_tgl = new Telerik.WinControls.UI.RadToggleButton();
             this.radPanel4 = new Telerik.WinControls.UI.RadPanel();
+            this.Energy_list = new Telerik.WinControls.UI.RadListView();
             this.Distance_lbl = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.Energy_list = new Telerik.WinControls.UI.RadListView();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radListView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).BeginInit();
@@ -253,7 +253,7 @@
             this.radButton1.Name = "radButton1";
             this.radButton1.Size = new System.Drawing.Size(175, 53);
             this.radButton1.TabIndex = 12;
-            this.radButton1.Text = "radButton1";
+            this.radButton1.Text = "Solve";
             this.radButton1.ThemeName = "Windows8";
             this.radButton1.Click += new System.EventHandler(this.radButton1_Click);
             // 
@@ -510,6 +510,34 @@
             this.radPanel4.TabIndex = 15;
             this.radPanel4.Text = "radPanel4";
             // 
+            // Energy_list
+            // 
+            this.Energy_list.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Energy_list.AutoScroll = true;
+            this.Energy_list.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            this.Energy_list.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.Energy_list.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.Energy_list.Location = new System.Drawing.Point(3, 64);
+            this.Energy_list.Name = "Energy_list";
+            this.Energy_list.Size = new System.Drawing.Size(210, 300);
+            this.Energy_list.TabIndex = 0;
+            this.Energy_list.Text = "radListView2";
+            this.Energy_list.ThemeName = "VisualStudio2012Dark";
+            ((Telerik.WinControls.UI.RadListViewElement)(this.Energy_list.GetChildAt(0))).BorderWidth = 10F;
+            ((Telerik.WinControls.UI.RadListViewElement)(this.Energy_list.GetChildAt(0))).BorderLeftWidth = 10F;
+            ((Telerik.WinControls.UI.RadListViewElement)(this.Energy_list.GetChildAt(0))).BorderTopWidth = 10F;
+            ((Telerik.WinControls.UI.RadListViewElement)(this.Energy_list.GetChildAt(0))).BorderRightWidth = 10F;
+            ((Telerik.WinControls.UI.RadListViewElement)(this.Energy_list.GetChildAt(0))).BorderBottomWidth = 10F;
+            ((Telerik.WinControls.UI.RadListViewElement)(this.Energy_list.GetChildAt(0))).BorderLeftColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            ((Telerik.WinControls.UI.RadListViewElement)(this.Energy_list.GetChildAt(0))).BorderTopColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            ((Telerik.WinControls.UI.RadListViewElement)(this.Energy_list.GetChildAt(0))).BorderRightColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            ((Telerik.WinControls.UI.RadListViewElement)(this.Energy_list.GetChildAt(0))).BorderBottomColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            ((Telerik.WinControls.UI.RadListViewElement)(this.Energy_list.GetChildAt(0))).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            ((Telerik.WinControls.UI.SimpleListViewElement)(this.Energy_list.GetChildAt(0).GetChildAt(0))).SelectionRectangleColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            ((Telerik.WinControls.UI.SimpleListViewElement)(this.Energy_list.GetChildAt(0).GetChildAt(0))).SelectionRectangleBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            // 
             // Distance_lbl
             // 
             this.Distance_lbl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -548,34 +576,6 @@
             this.label1.Size = new System.Drawing.Size(41, 21);
             this.label1.TabIndex = 18;
             this.label1.Text = "{X,Y}";
-            // 
-            // Energy_list
-            // 
-            this.Energy_list.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Energy_list.AutoScroll = true;
-            this.Energy_list.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.Energy_list.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.Energy_list.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.Energy_list.Location = new System.Drawing.Point(3, 64);
-            this.Energy_list.Name = "Energy_list";
-            this.Energy_list.Size = new System.Drawing.Size(210, 300);
-            this.Energy_list.TabIndex = 0;
-            this.Energy_list.Text = "radListView2";
-            this.Energy_list.ThemeName = "VisualStudio2012Dark";
-            ((Telerik.WinControls.UI.RadListViewElement)(this.Energy_list.GetChildAt(0))).BorderWidth = 10F;
-            ((Telerik.WinControls.UI.RadListViewElement)(this.Energy_list.GetChildAt(0))).BorderLeftWidth = 10F;
-            ((Telerik.WinControls.UI.RadListViewElement)(this.Energy_list.GetChildAt(0))).BorderTopWidth = 10F;
-            ((Telerik.WinControls.UI.RadListViewElement)(this.Energy_list.GetChildAt(0))).BorderRightWidth = 10F;
-            ((Telerik.WinControls.UI.RadListViewElement)(this.Energy_list.GetChildAt(0))).BorderBottomWidth = 10F;
-            ((Telerik.WinControls.UI.RadListViewElement)(this.Energy_list.GetChildAt(0))).BorderLeftColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            ((Telerik.WinControls.UI.RadListViewElement)(this.Energy_list.GetChildAt(0))).BorderTopColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            ((Telerik.WinControls.UI.RadListViewElement)(this.Energy_list.GetChildAt(0))).BorderRightColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            ((Telerik.WinControls.UI.RadListViewElement)(this.Energy_list.GetChildAt(0))).BorderBottomColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            ((Telerik.WinControls.UI.RadListViewElement)(this.Energy_list.GetChildAt(0))).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            ((Telerik.WinControls.UI.SimpleListViewElement)(this.Energy_list.GetChildAt(0).GetChildAt(0))).SelectionRectangleColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            ((Telerik.WinControls.UI.SimpleListViewElement)(this.Energy_list.GetChildAt(0).GetChildAt(0))).SelectionRectangleBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             // 
             // RadForm2
             // 
